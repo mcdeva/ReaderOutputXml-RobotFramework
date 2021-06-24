@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="ReadOutputXml-RobotFramework",
-    version="0.0.1",
+    version="0.0.3",
     author="Rukpong",
     author_email="aisendbox@gmail.com",
     description="Reader the output xml from structure RobotFramework output",

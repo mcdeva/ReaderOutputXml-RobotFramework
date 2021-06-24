@@ -1,6 +1,6 @@
 from unittest import TestCase
 from datetime import datetime
-from .. import ReadOutputXmlRobotFramework as ReaderXml
+from .. import ReaderRobotFramework as ReaderXml
 
 functional_test_xml_file_test: str = 'D:\\MySpace\\Code\\ScriptTools\\TDDPython\\' \
                                      'FunctionalTest20210205.xml'
