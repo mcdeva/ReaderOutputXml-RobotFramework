@@ -74,20 +74,22 @@ reader = ReaderRobotFramework(PATH_OUTPUT_XML, './suite/suite')
         "date_time": "20210625 16:16:13.621",
         "msg_error": ""
       }
-    }]
+    ]
   },
   "Example Project2": {
     "SourceFile": "/documents/path/robot/file2.robot",
-    "TestcaseDetail": [{
-      "testcase_name": "name test1",
-      "documentation": "documentation",
-      "tags": "tag1",
-      "step_keyword": "1. keyword1",
-      "test_result": "FAIL",
-      "keyword_fail": "keyword2",
-      "date_time": "20210625 16:34:54.895",
-      "msg_error": "cannot execute keyword2"
-    }]
+    "TestcaseDetail": [
+      {
+        "testcase_name": "name test1",
+        "documentation": "documentation",
+        "tags": "tag1",
+        "step_keyword": "1. keyword1",
+        "test_result": "FAIL",
+        "keyword_fail": "keyword2",
+        "date_time": "20210625 16:34:54.895",
+        "msg_error": "cannot execute keyword2"
+      }
+    ]
   }
 }
 ```
