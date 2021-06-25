@@ -28,14 +28,14 @@ class ReaderRobotFramework:
         self.keyword_ignore = keyword_regex_ignore
 
     def convert_xml_file_to_dict(self) -> dict:
-        project_dict = {}
+        project_dict: dict = {}
         root = ET.parse(self.xml_file).getroot()
 
         for testsuite in root.findall(self.main_suite_xpath):
             testsuite_name = testsuite.get('name')
-            project_dict['ProjectName'] = testsuite_name
+            detail_project: dict = {}
             source_file = testsuite.get('source')
-            project_dict['SourceFile'] = source_file
+            detail_project['SourceFile'] = source_file
 
             # check tag testsuite has attribute name only
             if testsuite_name:
@@ -46,7 +46,9 @@ class ReaderRobotFramework:
                         # binding testcase detail
                         testcase_detail = self.get_element_testcase(testcase, self.keyword_ignore)
                         suite_testcase.append(testcase_detail)
-                project_dict['TestcaseDetail'] = suite_testcase
+
+                detail_project['TestcaseDetail'] = suite_testcase
+            project_dict[testsuite_name] = detail_project
         return project_dict
 
     @staticmethod
@@ -54,6 +56,7 @@ class ReaderRobotFramework:
         testcase_name = element_testcase.get('name')
         doc: str = ''
         tags: str = ''
+        multi_tag: list = []
         test_steps: str = ''
         step: int = 1
         test_result: str = ''
@@ -64,7 +67,7 @@ class ReaderRobotFramework:
             if detail.tag == 'kw':
                 keyword = detail
                 keyword_name = keyword.get('name')
-                # ถ้ามีค่า ignore keyword และ ชื่อ keyword อยู่ใน list ให้ข้าม keyword นั้น ๆ
+                # check ignore keyword from keyword_regex_ignore variable (skip keyword in keyword_regex_ignore list)
                 ignore_keyword: bool = False
                 if keyword_regex_ignore is not None:
                     for keyword_ignore in keyword_regex_ignore:
@@ -79,7 +82,7 @@ class ReaderRobotFramework:
                     if status_keyword == 'FAIL' and keyword_fail == '':
                         keyword_fail = keyword_name
 
-                # กรณีมีข้อมูลแล้ว ให้ใส่ \n เพื่อขึ้นบรรทัดใหม่
+                # set new line for concat string
                 if test_steps:
                     test_steps += '\n'
                 test_steps += f'{step}. {keyword_name}'
@@ -88,15 +91,9 @@ class ReaderRobotFramework:
             if detail.tag == 'doc':
                 doc = detail.text
 
-            # กรณีมี tag หลายตัว จะต่อข้อมูลด้วย ", "
-            # if detail.tag == 'tags':
-            #     tag_list: list = []
-            #     for tag in detail:
-            #         tag_list.append(tag.text)
-            #     tags = ', '.join(tag_list)
-
+            # set tag into multi_tag
             if detail.tag == 'tag':
-                tags = detail.text
+                multi_tag.append(detail.text)
 
             if detail.tag == 'status':
                 status = detail
@@ -105,7 +102,10 @@ class ReaderRobotFramework:
                 if status.text:
                     msg_error = status.text
 
-        # bind data เข้าไปใน testcase_detail_dict เตรียม return
+        # concat ', ' between each tag
+        tags = ', '.join(multi_tag)
+
+        # bind data to testcase_detail_dict for return dictionary
         testcase_detail_dict: TestcaseDetailDict = \
             TestcaseDetailDict(testcase_name=testcase_name,
                                documentation=doc,
