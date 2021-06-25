@@ -13,7 +13,7 @@ class TestcaseDetailDict(TypedDict):
     step_keyword: str
     test_result: str
     keyword_fail: str
-    date_time: datetime
+    date_time: str
     msg_error: str
 
 
@@ -61,7 +61,7 @@ class ReaderRobotFramework:
         step: int = 1
         test_result: str = ''
         keyword_fail: str = ''
-        date_time = ''
+        date_time_format: str = ''
         msg_error: str = ''
         for detail in element_testcase:
             if detail.tag == 'kw':
@@ -99,6 +99,8 @@ class ReaderRobotFramework:
                 status = detail
                 test_result = status.get('status')
                 date_time = datetime.strptime(status.get('starttime'), '%Y%m%d %H:%M:%S.%f')
+                date_time_format = f'{date_time:%Y%m%d %X.%f}'
+                date_time_format = date_time_format[:-3]
                 if status.text:
                     msg_error = status.text
 
@@ -113,7 +115,7 @@ class ReaderRobotFramework:
                                step_keyword=test_steps,
                                test_result=test_result,
                                keyword_fail=keyword_fail,
-                               date_time=date_time,
+                               date_time=date_time_format,
                                msg_error=msg_error)
         return testcase_detail_dict
 

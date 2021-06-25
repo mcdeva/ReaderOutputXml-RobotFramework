@@ -53,27 +53,39 @@ reader = ReaderRobotFramework(PATH_OUTPUT_XML, './suite/suite')
 {
   "Example Project1": {
     "SourceFile": "/documents/path/robot/file1.robot",
-    "TestcaseDetail": [{
-      "testcase_name": "name test1",
-      "documentation": "documentation",
-      "tags": "tag1, tag2",
-      "step_keyword": "1. keyword1\n2. keyword2",
-      "test_result": "PASS",
-      "keyword_fail": "",
-      "date_time": object_datetime,
-      "msg_error": ""
+    "TestcaseDetail": [
+      {
+        "testcase_name": "name test1",
+        "documentation": "documentation",
+        "tags": "tag1, tag2",
+        "step_keyword": "1. keyword1\n2. keyword2",
+        "test_result": "PASS",
+        "keyword_fail": "",
+        "date_time": "20210625 16:16:12.619",
+        "msg_error": ""
+      },
+      {
+        "testcase_name": "name test2",
+        "documentation": "documentation",
+        "tags": "tag1, tag2",
+        "step_keyword": "1. keyword1\n2. keyword2",
+        "test_result": "PASS",
+        "keyword_fail": "",
+        "date_time": "20210625 16:16:13.621",
+        "msg_error": ""
+      }
     }]
   },
   "Example Project2": {
     "SourceFile": "/documents/path/robot/file2.robot",
     "TestcaseDetail": [{
-      "testcase_name": "name test2",
+      "testcase_name": "name test1",
       "documentation": "documentation",
       "tags": "tag1",
       "step_keyword": "1. keyword1",
       "test_result": "FAIL",
       "keyword_fail": "keyword2",
-      "date_time": object_datetime,
+      "date_time": "20210625 16:34:54.895",
       "msg_error": "cannot execute keyword2"
     }]
   }
