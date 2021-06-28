@@ -19,7 +19,7 @@ class TestcaseDetailDict(TypedDict):
 
 class ReaderRobotFramework:
     def __init__(self, xml_file, main_suite_xpath):
-        self.xml_file: str = xml_file
+        self.xml_file: str = f'{xml_file}'
         self.main_suite_xpath: str = main_suite_xpath
         self.keyword_ignore: list = KEYWORD_REGEX_IGNORE
         self.robot_output: dict = self.convert_xml_file_to_dict()
