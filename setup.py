@@ -1,3 +1,9 @@
+'''
+# Deploy library #
+py -m build
+twine check dist/*
+twine upload dist/*
+'''
 from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
@@ -5,7 +11,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="ReadOutputXml-RobotFramework",
-    version="0.0.5",
+    version="0.0.5.1",
     author="Rukpong",
     author_email="aisendbox@gmail.com",
     description="Reader the output xml from structure RobotFramework output",
